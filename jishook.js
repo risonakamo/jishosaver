@@ -2,7 +2,6 @@ class kanjibox
 {
     constructor(box)
     {
-        this.box=box;
         this.kanjichars=box.querySelector(".concept_light-representation .text");
         this.kanji=this.kanjichars.innerText;
         this.kanjisplit();
@@ -10,31 +9,46 @@ class kanjibox
         this.hboxes=box.querySelectorAll(".concept_light-representation .furigana span");
         this.meanings=box.querySelectorAll(".meaning-meaning");
 
-        this.initEvents();
+        this.initEvents(box);
     }
 
-    initEvents()
+    initEvents(box)
     {
         for (var x=0;x<this.hboxes.length;x++)
         {
-            this.hboxes[x].index=x;
-            this.kanjichars[x].index=x;
+            //data bind the corresponding element for hiraganas and kanji
+            this.hboxes[x].otherchar=this.kanjichars[x];
+            this.kanjichars[x].otherchar=this.hboxes[x];
+
             this.hboxes[x].addEventListener("click",(e)=>{
                 e.currentTarget.classList.toggle("selected");
-                this.kanjichars[e.currentTarget.index].classList.toggle("selected");
+                e.currentTarget.otherchar.classList.toggle("selected");
             });
 
             this.kanjichars[x].addEventListener("click",(e)=>{
                 e.currentTarget.classList.toggle("selected");
-                this.hboxes[e.currentTarget.index].classList.toggle("selected");
+                e.currentTarget.otherchar.classList.toggle("selected");
             });
         }
 
-        for (var x=0;x<this.meanings.length;x++)
+        var meaningselectors=box.querySelectorAll(".meaning-definition-section_divider");
+        for (var x=0;x<meaningselectors.length;x++)
         {
-            this.meanings[x].addEventListener("click",(e)=>{
-                e.currentTarget.classList.toggle("selected");
+            meaningselectors[x].meaning=this.meanings[x];
+            meaningselectors[x].addEventListener("click",(e)=>{
+                e.currentTarget.meaning.classList.toggle("selected");
+
+                if (e.currentTarget.meaning.contentEditable=="true")
+                {
+                    e.currentTarget.meaning.contentEditable=false;
+                }
+
+                else
+                {
+                    e.currentTarget.meaning.contentEditable=true;
+                }
             });
+
         }
     }
 
