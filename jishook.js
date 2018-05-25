@@ -2,7 +2,10 @@ class kanjibox
 {
     constructor(box)
     {
-        this.kanji=box.querySelector(".concept_light-representation .text").innerText;
+        this.kanjichars=box.querySelector(".concept_light-representation .text");
+        this.kanji=this.kanjichars.innerText;
+        this.kanjisplit();
+
         this.hboxes=box.querySelectorAll(".concept_light-representation .furigana span");
         this.meanings=box.querySelectorAll(".meaning-meaning");
 
@@ -25,4 +28,26 @@ class kanjibox
             });
         }
     }
+
+    kanjisplit()
+    {
+        var kchars=this.kanji.split("");
+        var res="";
+        for (var x=0;x<kchars.length;x++)
+        {
+            res+=`<span>${kchars[x]}</span>`;
+        }
+
+        this.kanjichars.innerHTML=res;
+        this.kanjichars=this.kanjichars.children;
+    }
+}
+
+document.head.insertAdjacentHTML("beforeend",`<link rel="stylesheet" href="${chrome.runtime.getURL("jishosave-style.css")}">`);
+
+var boxes=document.querySelectorAll(".concept_light");
+var kboxes=[];
+for (var x=0;x<boxes.length;x++)
+{
+    kboxes.push(new kanjibox(boxes[x]));
 }

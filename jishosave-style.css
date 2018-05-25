@@ -1,0 +1,14 @@
+.concept_light-representation .furigana,.meaning-meaning,.concept_light-representation .text span
+{
+    cursor: pointer;
+}
+
+.concept_light-representation .furigana .selected
+{
+    color: red;
+}
+
+.meaning-meaning.selected
+{
+
+}

@@ -4,5 +4,13 @@
     "version":"0",
     "description":"save jisho entries and output as fcardsk json",
 
-    "permissions":["tabs","https://jisho.org/search/*"]
+    "permissions":["tabs","https://jisho.org/search/*"],
+
+    "content_scripts":[{
+        "matches":["https://jisho.org/search/*"],
+        "js":["jishook.js"],
+        "run_at":"document_end"
+    }],
+
+    "web_accessible_resources":["jishosave-style.css"]
 }
