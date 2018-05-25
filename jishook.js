@@ -10,6 +10,7 @@ class kanjibox
         this.meanings=box.querySelectorAll(".meaning-meaning");
 
         this.initEvents(box);
+        this.insertSavebutton(box);
     }
 
     initEvents(box)
@@ -110,7 +111,23 @@ class kanjibox
             res.rubys=rubys;
         }
 
-        console.log(res);
+        return res;
+    }
+
+    insertSavebutton(box)
+    {
+        var savebutton=document.createElement("a");
+        savebutton.innerHTML=`<a class="light-details_link" href="">save</a>`;
+        savebutton.addEventListener("click",(e)=>{
+            e.preventDefault();
+            e.currentTarget.innerText="saved";
+
+            var addkanji={};
+            addkanji[this.kanji]=this.genjson();
+            chrome.storage.local.set(addkanji);
+        });
+
+        box.querySelector(".light-details_link").insertAdjacentElement("afterend",savebutton);
     }
 }
 

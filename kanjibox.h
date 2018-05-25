@@ -9,7 +9,8 @@ class kanjibox
 
     string kanji;
 
-    void initEvents();
+    void initEvents(element box);
     void kanjisplit();
-    void genjson();
+    void insertSavebutton(element box);
+    object genjson();
 }

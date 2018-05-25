@@ -4,7 +4,7 @@
     "version":"0",
     "description":"save jisho entries and output as fcardsk json",
 
-    "permissions":["tabs","https://jisho.org/search/*"],
+    "permissions":["tabs","https://jisho.org/search/*","storage"],
 
     "content_scripts":[{
         "matches":["https://jisho.org/search/*"],
