@@ -120,8 +120,6 @@ class kanjibox
         savebutton.innerHTML=`<a class="light-details_link" href="">save</a>`;
         savebutton.addEventListener("click",(e)=>{
             e.preventDefault();
-            e.currentTarget.innerText="saved";
-
             var addkanji={};
             addkanji[this.kanji]=this.genjson();
             chrome.storage.local.set(addkanji);
