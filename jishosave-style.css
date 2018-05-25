@@ -3,12 +3,12 @@
     cursor: pointer;
 }
 
-.concept_light-representation .furigana .selected
+.concept_light-representation .furigana .selected,.concept_light-representation .text span.selected
 {
     color: red;
 }
 
 .meaning-meaning.selected
 {
-
+    color: green;
 }
