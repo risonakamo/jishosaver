@@ -1,0 +1,8 @@
+{
+    "manifest_version":2,
+    "name":"jisho saver",
+    "version":"0",
+    "description":"save jisho entries and output as fcardsk json",
+
+    "permissions":["tabs","https://jisho.org/search/*"]
+}
