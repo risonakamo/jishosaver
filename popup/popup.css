@@ -2,6 +2,23 @@
 
 body
 {
-    width: 500px;
+    width: 200px;
     margin: 0;
+}
+
+.kanjibox
+{
+    height: 50px;
+    padding: 6px;
+}
+
+.kanjibox .kanji
+{
+    font-size: 30px;
+}
+
+.kanjibox .hiragana
+{
+    height: 12px;
+    padding-left: 2px;
 }

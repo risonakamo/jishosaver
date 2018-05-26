@@ -6,8 +6,14 @@ function main()
 {
     chrome.storage.local.get(null,(data)=>{
         _data=data;
-        var kanjiwords=Object.keys(data);
-        document.querySelector(".output").innerText=JSON.stringify(kanjiwords);
+
+        var res="";
+        for (var x in _data)
+        {
+            res+=`<div class="kanjibox"><div class="hiragana">${_data[x].maindata[1]}</div><div class="kanji">${x}</div></div>`;
+        }
+
+        document.querySelector(".output2").innerHTML=res;
     });
 
     document.querySelector(".clear").addEventListener("click",(e)=>{
