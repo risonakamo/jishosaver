@@ -122,6 +122,7 @@ class kanjibox
             e.preventDefault();
             var addkanji={};
             addkanji[this.kanji]=this.genjson();
+            savebutton.innerText=JSON.stringify(addkanji[this.kanji]);
             chrome.storage.local.set(addkanji);
         });
 
