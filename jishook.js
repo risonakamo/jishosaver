@@ -116,8 +116,9 @@ class kanjibox
 
     insertSavebutton(box)
     {
-        var savebutton=document.createElement("a");
+        var savebutton=document.createElement("div");
         savebutton.innerHTML=`<a class="light-details_link" href="">save</a>`;
+        savebutton=savebutton.firstChild;
         savebutton.addEventListener("click",(e)=>{
             e.preventDefault();
             var addkanji={};
@@ -126,7 +127,7 @@ class kanjibox
             chrome.storage.local.set(addkanji);
         });
 
-        box.querySelector(".light-details_link").insertAdjacentElement("afterend",savebutton);
+        box.insertAdjacentElement("beforeend",savebutton);
     }
 }
 

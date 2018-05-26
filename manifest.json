@@ -1,13 +1,14 @@
 {
     "manifest_version":2,
     "name":"jisho saver",
-    "version":"0.1.0",
+    "version":"0.2.0",
     "description":"save jisho entries and output as fcardsk json",
 
-    "permissions":["tabs","https://jisho.org/search/*","storage"],
+    "permissions":["tabs","https://jisho.org/search/*",
+        "https://jisho.org/word/*","storage"],
 
     "content_scripts":[{
-        "matches":["https://jisho.org/search/*"],
+        "matches":["https://jisho.org/search/*","https://jisho.org/word/*"],
         "js":["jishook.js"],
         "run_at":"document_end"
     }],
