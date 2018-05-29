@@ -131,11 +131,47 @@ class kanjibox
     }
 }
 
-document.head.insertAdjacentHTML("beforeend",`<link rel="stylesheet" href="${chrome.runtime.getURL("jishosave-style.css")}">`);
-
-var boxes=document.querySelectorAll(".concept_light");
-var kboxes=[];
-for (var x=0;x<boxes.length;x++)
+function main()
 {
-    kboxes.push(new kanjibox(boxes[x]));
+    if (window.location.href.search("kanji")>=0)
+    {
+        kanjipagehook();
+        return;
+    }
+
+    document.head.insertAdjacentHTML("beforeend",`<link rel="stylesheet" href="${chrome.runtime.getURL("jishosave-style.css")}">`);
+
+    var boxes=document.querySelectorAll(".concept_light");
+    var kboxes=[];
+    for (var x=0;x<boxes.length;x++)
+    {
+        kboxes.push(new kanjibox(boxes[x]));
+    }
 }
+
+function kanjipagehook()
+{
+    var savebutton=document.createElement("div");
+    savebutton.innerHTML=`<a href="">save</a>`;
+    savebutton=savebutton.firstChild;
+
+    savebutton.addEventListener("click",(e)=>{
+        e.preventDefault();
+
+        chrome.storage.local.get("kanjilist",(data)=>{
+            data=data.kanjilist;
+            if (!data)
+            {
+                data={};
+            }
+
+            data[document.querySelector(".character").innerText]=1;
+
+            chrome.storage.local.set({kanjilist:data});
+        });
+    });
+
+    document.querySelectorAll(".kanji .large-12")[1].insertAdjacentElement("beforeend",savebutton);
+}
+
+main();

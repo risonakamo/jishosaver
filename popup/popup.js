@@ -10,6 +10,11 @@ function main()
         var res="";
         for (var x in _data)
         {
+            if (x=="kanjilist")
+            {
+                continue;
+            }
+
             res+=`<div class="kanjibox"><div class="hiragana">${_data[x].maindata[1]}</div><div class="kanji">${x}</div></div>`;
         }
 
@@ -28,6 +33,11 @@ function main()
         var res=[];
         for (var x in _data)
         {
+            if (x=="kanjilist")
+            {
+                continue;
+            }
+
             res.push(_data[x]);
         }
 
