@@ -23,7 +23,6 @@ function main()
 
     document.querySelector(".clear").addEventListener("click",(e)=>{
         e.preventDefault();
-
         chrome.storage.local.clear();
     });
 
@@ -35,12 +34,26 @@ function main()
         {
             if (x=="kanjilist")
             {
+                var kanjilist=Object.keys(_data[x]);
+                var kanjiliststring="";
+
+                for (var y=0;y<kanjilist.length;y++)
+                {
+                    kanjiliststring+=kanjilist[y];
+                }
+
+                var output=document.querySelector(".output3");
+                output.value=kanjiliststring;
+                output.classList.remove("hidden");
+
                 continue;
             }
 
             res.push(_data[x]);
         }
 
-        document.querySelector(".output").innerText=JSON.stringify({kcards:res});
+        var output=document.querySelector(".output");
+        output.value=JSON.stringify({kcards:res});
+        output.classList.remove("hidden");
     });
 }

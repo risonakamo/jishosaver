@@ -22,3 +22,18 @@ body
     height: 12px;
     padding-left: 2px;
 }
+
+.hidden
+{
+    display: none;
+}
+
+.textarea-output
+{
+    width: 100%;
+}
+
+.output
+{
+    height: 200px;
+}
