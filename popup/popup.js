@@ -12,6 +12,13 @@ function main()
         {
             if (x=="kanjilist")
             {
+                var kanjiliststring="";
+                for (var y in _data[x])
+                {
+                    kanjiliststring+=y;
+                }
+
+                document.querySelector(".kanjilist-output").innerText=kanjiliststring;
                 continue;
             }
 

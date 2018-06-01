@@ -37,3 +37,15 @@ body
 {
     height: 200px;
 }
+
+.kanjilist-output
+{
+    font-size: 23px;
+    padding: 5px;
+}
+
+.output2
+{
+    max-height: 300px;
+    overflow: auto;
+}
