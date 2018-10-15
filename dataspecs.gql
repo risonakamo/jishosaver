@@ -4,15 +4,18 @@ type localStorage
         [kanji]:int
     },
 
-    [words]:{
-        maindata:[
-            kanji:string,
-            hiragana:string,
-            definitions:string
-        ],
+    [words]: kanjidata
+}
 
-        rubys:[[
-            rubyposition:int,ruby:string
-        ]]!
-    }
+type kanjidata
+{
+    maindata:[
+        string, #kanji
+        string, #hiragana
+        string  #definition string
+    ],
+
+    rubys:[[
+        rubyposition:int,ruby:string
+    ]]!
 }

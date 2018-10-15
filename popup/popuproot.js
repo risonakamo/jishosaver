@@ -4,9 +4,19 @@
 class PopupRoot extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteWord = this.deleteWord.bind(this);
     this.state = {
       data: this.props.data
     };
+  } //delete a word given the word
+
+
+  deleteWord(word) {
+    delete this.state.data[word];
+    chrome.storage.local.remove(word);
+    this.setState({
+      data: this.state.data
+    });
   }
 
   render() {
@@ -22,7 +32,23 @@ class PopupRoot extends React.Component {
       className: "counter"
     }, "0")), React.createElement("div", {
       className: "word-list"
-    }), React.createElement("div", {
+    }, (() => {
+      var res = [];
+
+      for (var x in this.props.data) {
+        if (x == "kanjilist") {
+          continue;
+        }
+
+        res.push(React.createElement(WordBox, {
+          data: this.props.data[x],
+          deleteWord: this.deleteWord,
+          key: x
+        }));
+      }
+
+      return res;
+    })()), React.createElement("div", {
       className: "actions"
     }, React.createElement("div", {
       className: "button"
@@ -31,7 +57,9 @@ class PopupRoot extends React.Component {
     }, "\u30AF\u30EA\u30A2")));
   }
 
-} //WordBox()
+} //WordBox(object data,function deleteWord)
+//data: a kanjidata object from storage
+//deleteWord: from parent
 
 
 class WordBox extends React.Component {
@@ -41,8 +69,11 @@ class WordBox extends React.Component {
     }, React.createElement("div", {
       className: "hover-region"
     }, React.createElement("div", null, "\u635C\u7D22")), React.createElement("div", {
-      className: "hover-region right"
-    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("p", null, "\u305D\u3046\u3055\u304F"), React.createElement("h2", null, "\u635C\u7D22"));
+      className: "hover-region right",
+      onClick: () => {
+        this.props.deleteWord(this.props.data.maindata[0]);
+      }
+    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("p", null, this.props.data.maindata[1]), React.createElement("h2", null, this.props.data.maindata[0]));
   }
 
 } //KanjiList(string thelist)
