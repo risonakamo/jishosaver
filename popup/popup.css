@@ -1,6 +1,6 @@
 @charset "UTF-8";
-
-body
-{
-    margin: 0;
+body {
+  width: 330px;
+  height: 550px;
+  margin: 0;
 }
