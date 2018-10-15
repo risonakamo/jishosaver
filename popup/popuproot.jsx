@@ -1,3 +1,6 @@
+//PopupRoot(data data)
+//data: full data object from storage, see data specs
+//      for local storage
 class PopupRoot extends React.Component
 {
   constructor(props)
@@ -5,35 +8,20 @@ class PopupRoot extends React.Component
     super(props);
 
     this.state={
-      data:{}
+      data:this.props.data
     };
-  }
-
-  componentDidMount()
-  {
-    chrome.storage.local.get(null,(data)=>{
-      this.setState({data});
-    });
   }
 
   render()
   {
-
-    var kanjiList={
-      list:"",
-      len:0
-    };
-
+    var thelist="";
     if (this.state.data.kanjilist)
     {
-      var thelist=Object.keys(this.state.data.kanjilist);
-      kanjiList.list=thelist.join("");
-      kanjiList.len=thelist.length;
+      thelist=Object.keys(this.state.data.kanjilist).join("");
     }
 
     return (<>
-      <h1>漢字一覧 <span className="counter">{kanjiList.len}</span></h1>
-      <textarea className="kanji-list" defaultValue={kanjiList.list}></textarea>
+      <KanjiList thelist={thelist}/>
 
       <h1>単語一覧 <span className="counter">0</span></h1>
 
@@ -49,6 +37,7 @@ class PopupRoot extends React.Component
   }
 }
 
+//WordBox()
 class WordBox extends React.Component
 {
   render()
@@ -61,5 +50,36 @@ class WordBox extends React.Component
         <h2>捜索</h2>
       </div>
     );
+  }
+}
+
+//KanjiList(string thelist)
+class KanjiList extends React.Component
+{
+  constructor(props)
+  {
+    super(props);
+
+    this.state={
+      kanjilist:this.props.thelist
+    };
+  }
+
+  render()
+  {
+    var kanjilistlen=0;
+    if (this.state.kanjilist)
+    {
+      kanjilistlen=this.state.kanjilist.length;
+    }
+
+    return (<>
+      <h1>漢字一覧 <span className="counter">{kanjilistlen}</span></h1>
+      <textarea className="kanji-list" value={this.state.kanjilist}
+        onChange={(e)=>{
+          this.setState({kanjilist:e.currentTarget.value});
+        }}
+      ></textarea>
+    </>);
   }
 }
