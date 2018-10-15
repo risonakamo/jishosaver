@@ -29,26 +29,24 @@ class PopupRoot extends React.Component
       thelist=Object.keys(this.state.data.kanjilist).join("");
     }
 
+    var wordboxes=[];
+    for (var x in this.props.data)
+    {
+      if (x=="kanjilist")
+      {
+        continue;
+      }
+
+      wordboxes.push(<WordBox data={this.props.data[x]} deleteWord={this.deleteWord} key={x}/>);
+    }
+
     return (<>
       <KanjiList thelist={thelist}/>
 
-      <h1>単語一覧 <span className="counter">0</span></h1>
+      <h1>単語一覧 <span className="counter">{wordboxes.length}</span></h1>
 
       <div className="word-list">
-        {(()=>{
-          var res=[];
-          for (var x in this.props.data)
-          {
-            if (x=="kanjilist")
-            {
-              continue;
-            }
-
-            res.push(<WordBox data={this.props.data[x]} deleteWord={this.deleteWord} key={x}/>);
-          }
-
-          return res;
-        })()}
+        {wordboxes}
       </div>
 
       <div className="actions">
