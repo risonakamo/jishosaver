@@ -1,14 +1,41 @@
 class PopupRoot extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {}
+    };
+  }
+
+  componentDidMount() {
+    chrome.storage.local.get(null, data => {
+      this.setState({
+        data
+      });
+    });
+  }
+
   render() {
+    var kanjiList = {
+      list: "",
+      len: 0
+    };
+
+    if (this.state.data.kanjilist) {
+      var thelist = Object.keys(this.state.data.kanjilist);
+      kanjiList.list = thelist.join("");
+      kanjiList.len = thelist.length;
+    }
+
     return React.createElement(React.Fragment, null, React.createElement("h1", null, "\u6F22\u5B57\u4E00\u89A7 ", React.createElement("span", {
       className: "counter"
-    }, "6")), React.createElement("textarea", {
-      className: "kanji-list"
+    }, kanjiList.len)), React.createElement("textarea", {
+      className: "kanji-list",
+      defaultValue: kanjiList.list
     }), React.createElement("h1", null, "\u5358\u8A9E\u4E00\u89A7 ", React.createElement("span", {
       className: "counter"
-    }, "176")), React.createElement("div", {
+    }, "0")), React.createElement("div", {
       className: "word-list"
-    }, React.createElement(WordBox, null)), React.createElement("div", {
+    }), React.createElement("div", {
       className: "actions"
     }, React.createElement("div", {
       className: "button"

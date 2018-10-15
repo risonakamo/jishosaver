@@ -1,15 +1,44 @@
 class PopupRoot extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.state={
+      data:{}
+    };
+  }
+
+  componentDidMount()
+  {
+    chrome.storage.local.get(null,(data)=>{
+      this.setState({data});
+    });
+  }
+
   render()
   {
-    return (<>
-      <h1>漢字一覧 <span className="counter">6</span></h1>
-      <textarea className="kanji-list"></textarea>
 
-      <h1>単語一覧 <span className="counter">176</span></h1>
+    var kanjiList={
+      list:"",
+      len:0
+    };
+
+    if (this.state.data.kanjilist)
+    {
+      var thelist=Object.keys(this.state.data.kanjilist);
+      kanjiList.list=thelist.join("");
+      kanjiList.len=thelist.length;
+    }
+
+    return (<>
+      <h1>漢字一覧 <span className="counter">{kanjiList.len}</span></h1>
+      <textarea className="kanji-list" defaultValue={kanjiList.list}></textarea>
+
+      <h1>単語一覧 <span className="counter">0</span></h1>
 
       <div className="word-list">
-        <WordBox/>
+
       </div>
 
       <div className="actions">
