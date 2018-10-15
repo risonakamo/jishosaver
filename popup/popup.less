@@ -12,6 +12,8 @@
 
 @verylight-border: #ced4da;
 
+@main-borderround: 10px;
+
 body
 {
     width: 330px;
@@ -20,11 +22,15 @@ body
     color: @medium-text;
 }
 
-h1
+h1,h2
 {
     margin: 0;
-    font-size: 15px;
     font-weight: normal;
+}
+
+h1
+{
+    font-size: 15px;
     color: @darkest-text;
 }
 
@@ -35,7 +41,7 @@ h1
     resize: none;
     padding: 0;
     color: @medium-text;
-    border-radius: 10px;
+    border-radius: @main-borderround;
     border: 1px solid @verylight-border;
     outline: none;
     box-sizing: border-box;
@@ -45,5 +51,72 @@ h1
     &:focus
     {
         box-shadow: 0 0 0 2px @main-colour;
+    }
+}
+
+.word-box
+{
+    position: relative;
+    height: 60px;
+
+    h2
+    {
+        font-size: 32px;
+        color: @medium-text;
+        text-align: center;
+        padding-top: 6px;
+    }
+
+    .hover-region
+    {
+        position: absolute;
+        display: inline-block;
+        width: 50%;
+        height: 100%;
+        color: @main-colour;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity .2s;
+
+        &.right
+        {
+            right: 0;
+            text-align: right;
+            color: @hantai-colour;
+        }
+
+        &:hover
+        {
+            opacity: 1;
+        }
+
+        div
+        {
+            margin-top: 19px;
+        }
+    }
+}
+
+.actions
+{
+    .button
+    {
+        display: inline-flex;
+        width: 75px;
+        height: 40px;
+        font-size: 15px;
+        border-radius: 5px;
+        background-color: @main-colour;
+        color: white;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        cursor: pointer;
+
+        &:hover
+        {
+            background-color: @main-colour-darker;
+        }
     }
 }
