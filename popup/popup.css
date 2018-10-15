@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  width: 330px;
+  width: 280px;
   height: 550px;
   margin: 20px;
   color: #5a5a5a;
@@ -13,6 +13,7 @@ h2 {
 h1 {
   font-size: 15px;
   color: #343a40;
+  margin: 3px 15px 3px 15px;
 }
 .kanji-list {
   width: 100%;
@@ -25,14 +26,32 @@ h1 {
   outline: none;
   box-sizing: border-box;
   padding: 10px;
+  margin-bottom: 10px;
   transition: box-shadow 0.2s;
 }
 .kanji-list:focus {
   box-shadow: 0 0 0 2px #c9e591;
 }
+.word-list {
+  height: 380px;
+  overflow: auto;
+}
+.word-list::-webkit-scrollbar {
+  width: 3px;
+  background-color: white;
+}
+.word-list::-webkit-scrollbar-thumb {
+  width: 3px;
+  border-radius: 3px;
+  background-color: #5a5a5a;
+}
+.word-list::-webkit-scrollbar-button {
+  display: none;
+}
 .word-box {
   position: relative;
   height: 60px;
+  margin: 0 10px 0 10px;
 }
 .word-box h2 {
   font-size: 32px;
@@ -61,6 +80,10 @@ h1 {
 .word-box .hover-region div {
   margin-top: 19px;
 }
+.actions {
+  margin-top: 10px;
+  padding-left: 38px;
+}
 .actions .button {
   display: inline-flex;
   width: 75px;
@@ -73,6 +96,7 @@ h1 {
   align-items: center;
   justify-content: center;
   user-select: none;
+  margin: 0 13px 0 13px;
   cursor: pointer;
 }
 .actions .button:hover {
