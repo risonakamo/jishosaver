@@ -65,8 +65,15 @@ h1 .counter {
 .word-box p {
   height: 8px;
   color: #878787;
-  padding-top: 5px;
   text-align: center;
+}
+.word-box .left h2,
+.word-box .left p {
+  color: #c9e591;
+}
+.word-box .right h2,
+.word-box .right p {
+  color: #e55c60;
 }
 .word-box .hover-region {
   position: absolute;
@@ -87,7 +94,7 @@ h1 .counter {
   opacity: 1;
 }
 .word-box .hover-region div {
-  margin-top: 19px;
+  margin-top: 22px;
 }
 .actions {
   margin-top: 10px;

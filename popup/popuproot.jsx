@@ -64,22 +64,52 @@ class PopupRoot extends React.Component
 //deleteWord: from parent
 class WordBox extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.wordtext=React.createRef();
+  }
+
+  hoverZone(addclass,remove)
+  {
+    this.wordtext.current.classList.remove(...["left","right"]);
+
+    if (!remove)
+    {
+      this.wordtext.current.classList.add(addclass);
+    }
+
+    else
+    {
+      this.wordtext.current.classList.remove(addclass);
+    }
+  }
+
   render()
   {
     return (
       <div className="word-box">
-        <div className="hover-region"><div>捜索</div></div>
+        <div className="hover-region"
+          onClick={()=>{chrome.tabs.create({active:true,url:`https://jisho.org/search/${this.props.data.maindata[0]}`})}}
+          onMouseEnter={()=>{this.hoverZone("left")}}
+          onMouseLeave={()=>{this.hoverZone("left",1)}}
+        >
+          <div>捜索</div>
+        </div>
 
         <div className="hover-region right"
-          onClick={()=>{
-            this.props.deleteWord(this.props.data.maindata[0]);
-          }}
+          onClick={()=>{this.props.deleteWord(this.props.data.maindata[0])}}
+          onMouseEnter={()=>{this.hoverZone("right")}}
+          onMouseLeave={()=>{this.hoverZone("right",1)}}
         >
           <div>消す</div>
         </div>
 
-        <p>{this.props.data.maindata[1]}</p>
-        <h2>{this.props.data.maindata[0]}</h2>
+        <div ref={this.wordtext}>
+          <p>{this.props.data.maindata[1]}</p>
+          <h2>{this.props.data.maindata[0]}</h2>
+        </div>
       </div>
     );
   }

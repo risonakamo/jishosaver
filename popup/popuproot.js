@@ -63,17 +63,52 @@ class PopupRoot extends React.Component {
 
 
 class WordBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.wordtext = React.createRef();
+  }
+
+  hoverZone(addclass, remove) {
+    this.wordtext.current.classList.remove(...["left", "right"]);
+
+    if (!remove) {
+      this.wordtext.current.classList.add(addclass);
+    } else {
+      this.wordtext.current.classList.remove(addclass);
+    }
+  }
+
   render() {
     return React.createElement("div", {
       className: "word-box"
     }, React.createElement("div", {
-      className: "hover-region"
+      className: "hover-region",
+      onClick: () => {
+        chrome.tabs.create({
+          active: true,
+          url: `https://jisho.org/search/${this.props.data.maindata[0]}`
+        });
+      },
+      onMouseEnter: () => {
+        this.hoverZone("left");
+      },
+      onMouseLeave: () => {
+        this.hoverZone("left", 1);
+      }
     }, React.createElement("div", null, "\u635C\u7D22")), React.createElement("div", {
       className: "hover-region right",
       onClick: () => {
         this.props.deleteWord(this.props.data.maindata[0]);
+      },
+      onMouseEnter: () => {
+        this.hoverZone("right");
+      },
+      onMouseLeave: () => {
+        this.hoverZone("right", 1);
       }
-    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("p", null, this.props.data.maindata[1]), React.createElement("h2", null, this.props.data.maindata[0]));
+    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("div", {
+      ref: this.wordtext
+    }, React.createElement("p", null, this.props.data.maindata[1]), React.createElement("h2", null, this.props.data.maindata[0])));
   }
 
 } //KanjiList(string thelist)
