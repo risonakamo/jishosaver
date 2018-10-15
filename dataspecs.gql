@@ -1,0 +1,18 @@
+type localStorage
+{
+    kanjilist: {
+        [kanji]:int
+    },
+
+    [words]:{
+        maindata:[
+            kanji:string,
+            hiragana:string,
+            definitions:string
+        ],
+
+        rubys:[[
+            rubyposition:int,ruby:string
+        ]]!
+    }
+}

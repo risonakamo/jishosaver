@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+body
+{
+    width: 200px;
+    margin: 0;
+}
+
+.kanjibox
+{
+    height: 50px;
+    padding: 6px;
+}
+
+.kanjibox .kanji
+{
+    font-size: 30px;
+}
+
+.kanjibox .hiragana
+{
+    height: 12px;
+    padding-left: 2px;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.textarea-output
+{
+    width: 100%;
+}
+
+.output
+{
+    height: 200px;
+}
+
+.kanjilist-output
+{
+    font-size: 23px;
+    padding: 5px;
+}
+
+.output2
+{
+    max-height: 300px;
+    overflow: auto;
+}
