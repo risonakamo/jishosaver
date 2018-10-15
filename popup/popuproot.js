@@ -27,7 +27,7 @@ class WordBox extends React.Component {
       className: "hover-region"
     }, React.createElement("div", null, "\u635C\u7D22")), React.createElement("div", {
       className: "hover-region right"
-    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("h2", null, "\u635C\u7D22"));
+    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("p", null, "\u305D\u3046\u3055\u304F"), React.createElement("h2", null, "\u635C\u7D22"));
   }
 
 }

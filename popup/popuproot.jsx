@@ -28,6 +28,7 @@ class WordBox extends React.Component
       <div className="word-box">
         <div className="hover-region"><div>捜索</div></div>
         <div className="hover-region right"><div>消す</div></div>
+        <p>そうさく</p>
         <h2>捜索</h2>
       </div>
     );

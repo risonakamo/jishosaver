@@ -6,7 +6,8 @@ body {
   color: #5a5a5a;
 }
 h1,
-h2 {
+h2,
+p {
   margin: 0;
   font-weight: normal;
 }
@@ -60,7 +61,12 @@ h1 .counter {
   font-size: 32px;
   color: #5a5a5a;
   text-align: center;
-  padding-top: 6px;
+}
+.word-box p {
+  height: 8px;
+  color: #878787;
+  padding-top: 5px;
+  text-align: center;
 }
 .word-box .hover-region {
   position: absolute;
