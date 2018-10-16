@@ -83,6 +83,9 @@ class PopupRoot extends React.Component {
 class WordBox extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteAction = this.deleteAction.bind(this);
+    this.state = {//prepareToDelete:0
+    };
     this.wordtext = React.createRef();
   }
 
@@ -96,7 +99,23 @@ class WordBox extends React.Component {
     }
   }
 
+  deleteAction() {
+    if (!this.state.prepareToDelete) {
+      this.setState({
+        prepareToDelete: 1
+      });
+    } else {
+      this.props.deleteWord(this.props.data.maindata[0]);
+    }
+  }
+
   render() {
+    var deleteButtonString = "消す";
+
+    if (this.state.prepareToDelete) {
+      deleteButtonString = "本当？";
+    }
+
     return React.createElement("div", {
       className: "word-box"
     }, React.createElement("div", {
@@ -115,16 +134,14 @@ class WordBox extends React.Component {
       }
     }, React.createElement("div", null, "\u635C\u7D22")), React.createElement("div", {
       className: "hover-region right",
-      onClick: () => {
-        this.props.deleteWord(this.props.data.maindata[0]);
-      },
+      onClick: this.deleteAction,
       onMouseEnter: () => {
         this.hoverZone("right");
       },
       onMouseLeave: () => {
         this.hoverZone("right", 1);
       }
-    }, React.createElement("div", null, "\u6D88\u3059")), React.createElement("div", {
+    }, React.createElement("div", null, deleteButtonString)), React.createElement("div", {
       ref: this.wordtext
     }, React.createElement("p", null, this.props.data.maindata[1]), React.createElement("h2", null, this.props.data.maindata[0])));
   }

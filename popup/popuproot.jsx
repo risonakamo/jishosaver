@@ -85,6 +85,11 @@ class WordBox extends React.Component
   constructor(props)
   {
     super(props);
+    this.deleteAction=this.deleteAction.bind(this);
+
+    this.state={
+      //prepareToDelete:0
+    };
 
     this.wordtext=React.createRef();
   }
@@ -104,8 +109,27 @@ class WordBox extends React.Component
     }
   }
 
+  deleteAction()
+  {
+    if (!this.state.prepareToDelete)
+    {
+      this.setState({prepareToDelete:1});
+    }
+
+    else
+    {
+      this.props.deleteWord(this.props.data.maindata[0]);
+    }
+  }
+
   render()
   {
+    var deleteButtonString="消す";
+    if (this.state.prepareToDelete)
+    {
+      deleteButtonString="本当？";
+    }
+
     return (
       <div className="word-box">
         <div className="hover-region"
@@ -117,11 +141,11 @@ class WordBox extends React.Component
         </div>
 
         <div className="hover-region right"
-          onClick={()=>{this.props.deleteWord(this.props.data.maindata[0])}}
+          onClick={this.deleteAction}
           onMouseEnter={()=>{this.hoverZone("right")}}
           onMouseLeave={()=>{this.hoverZone("right",1)}}
         >
-          <div>消す</div>
+          <div>{deleteButtonString}</div>
         </div>
 
         <div ref={this.wordtext}>
