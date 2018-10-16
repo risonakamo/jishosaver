@@ -6,6 +6,7 @@ class PopupRoot extends React.Component {
     super(props);
     this.deleteWord = this.deleteWord.bind(this);
     this.saveJSON = this.saveJSON.bind(this);
+    this.clearAction = this.clearAction.bind(this);
     this.state = {
       data: this.props.data
     };
@@ -36,6 +37,18 @@ class PopupRoot extends React.Component {
       url: `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`,
       filename: "kanji.json"
     });
+  } //clear action for clear button
+
+
+  clearAction(e) {
+    if (!e.currentTarget.predelete) {
+      e.currentTarget.predelete = 1;
+      e.currentTarget.classList.add("predelete");
+      e.currentTarget.textContent = "本当？";
+    } else {
+      chrome.storage.local.clear();
+      window.close();
+    }
   }
 
   render() {
@@ -47,13 +60,13 @@ class PopupRoot extends React.Component {
 
     var wordboxes = [];
 
-    for (var x in this.props.data) {
+    for (var x in this.state.data) {
       if (x == "kanjilist") {
         continue;
       }
 
       wordboxes.push(React.createElement(WordBox, {
-        data: this.props.data[x],
+        data: this.state.data[x],
         deleteWord: this.deleteWord,
         key: x
       }));
@@ -71,7 +84,8 @@ class PopupRoot extends React.Component {
       className: "button",
       onClick: this.saveJSON
     }, "\u30BB\u30FC\u30D6"), React.createElement("div", {
-      className: "button"
+      className: "button",
+      onClick: this.clearAction
     }, "\u30AF\u30EA\u30A2")));
   }
 

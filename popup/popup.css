@@ -116,3 +116,9 @@ h1 .counter {
 .actions .button:hover {
   background-color: #bbe565;
 }
+.actions .button.predelete {
+  background-color: #e55c60;
+}
+.actions .download-carrier {
+  display: none;
+}

@@ -8,6 +8,7 @@ class PopupRoot extends React.Component
     super(props);
     this.deleteWord=this.deleteWord.bind(this);
     this.saveJSON=this.saveJSON.bind(this);
+    this.clearAction=this.clearAction.bind(this);
 
     this.state={
       data:this.props.data
@@ -41,6 +42,23 @@ class PopupRoot extends React.Component
     });
   }
 
+  //clear action for clear button
+  clearAction(e)
+  {
+    if (!e.currentTarget.predelete)
+    {
+      e.currentTarget.predelete=1;
+      e.currentTarget.classList.add("predelete");
+      e.currentTarget.textContent="本当？";
+    }
+
+    else
+    {
+      chrome.storage.local.clear();
+      window.close();
+    }
+  }
+
   render()
   {
     var thelist="";
@@ -50,14 +68,14 @@ class PopupRoot extends React.Component
     }
 
     var wordboxes=[];
-    for (var x in this.props.data)
+    for (var x in this.state.data)
     {
       if (x=="kanjilist")
       {
         continue;
       }
 
-      wordboxes.push(<WordBox data={this.props.data[x]} deleteWord={this.deleteWord} key={x}/>);
+      wordboxes.push(<WordBox data={this.state.data[x]} deleteWord={this.deleteWord} key={x}/>);
     }
 
     return (<>
@@ -71,7 +89,7 @@ class PopupRoot extends React.Component
 
       <div className="actions">
         <div className="button" onClick={this.saveJSON}>セーブ</div>
-        <div className="button">クリア</div>
+        <div className="button" onClick={this.clearAction}>クリア</div>
       </div>
     </>);
   }
