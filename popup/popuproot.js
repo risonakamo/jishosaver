@@ -5,6 +5,7 @@ class PopupRoot extends React.Component {
   constructor(props) {
     super(props);
     this.deleteWord = this.deleteWord.bind(this);
+    this.saveJSON = this.saveJSON.bind(this);
     this.state = {
       data: this.props.data
     };
@@ -16,6 +17,24 @@ class PopupRoot extends React.Component {
     chrome.storage.local.remove(word);
     this.setState({
       data: this.state.data
+    });
+  }
+
+  saveJSON() {
+    var data = [];
+
+    for (var x in this.state.data) {
+      if (x != "kanjilist") {
+        data.push(this.state.data[x]);
+      }
+    }
+
+    data = {
+      kcards: data
+    };
+    chrome.downloads.download({
+      url: `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`,
+      filename: "kanji.json"
     });
   }
 
@@ -49,7 +68,8 @@ class PopupRoot extends React.Component {
     }, wordboxes), React.createElement("div", {
       className: "actions"
     }, React.createElement("div", {
-      className: "button"
+      className: "button",
+      onClick: this.saveJSON
     }, "\u30BB\u30FC\u30D6"), React.createElement("div", {
       className: "button"
     }, "\u30AF\u30EA\u30A2")));

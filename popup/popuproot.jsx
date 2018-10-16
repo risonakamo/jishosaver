@@ -7,6 +7,7 @@ class PopupRoot extends React.Component
   {
     super(props);
     this.deleteWord=this.deleteWord.bind(this);
+    this.saveJSON=this.saveJSON.bind(this);
 
     this.state={
       data:this.props.data
@@ -19,6 +20,25 @@ class PopupRoot extends React.Component
     delete this.state.data[word];
     chrome.storage.local.remove(word);
     this.setState({data:this.state.data});
+  }
+
+  saveJSON()
+  {
+    var data=[];
+    for (var x in this.state.data)
+    {
+      if (x!="kanjilist")
+      {
+        data.push(this.state.data[x]);
+      }
+    }
+
+    data={kcards:data};
+
+    chrome.downloads.download({
+      url:`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`,
+      filename:"kanji.json"
+    });
   }
 
   render()
@@ -50,7 +70,7 @@ class PopupRoot extends React.Component
       </div>
 
       <div className="actions">
-        <div className="button">セーブ</div>
+        <div className="button" onClick={this.saveJSON}>セーブ</div>
         <div className="button">クリア</div>
       </div>
     </>);

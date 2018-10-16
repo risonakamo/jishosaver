@@ -14,3 +14,10 @@ function showStorage()
         console.log(data);
     });
 }
+
+//attach an object to a link element
+function attachJSON(data,link,filename)
+{
+    link.href=`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
+    link.download=`${filename}.json`;
+}
